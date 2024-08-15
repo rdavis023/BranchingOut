@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Home</title>
+    <link href="assets/css/_Home.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/_Nav.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+
+<body>
+    <main>
+        <div class="topnav">
+            <a class="active">Home</a>
+            <a href="pages/aboutus.html">About</a>
+        </div>
+
+        <div class="cred-container">
+            <img id="branchingOutImg" src="assets/images/BranchingOut.png" alt="Branching Out Image" width="300" height="76">
+            <button type="submit" class="Btn form-group" onclick="openLoginIframe()">Login</button>
+            <button type="submit" class="Btn form-group" onclick="openRegisterIframe()">Register</button>
+            <div id="loginiframeContainer">
+                <span id="loginCloseBtn" onclick="closeLoginIframe()">&times;</span>
+                <iframe src="./pages/login.html" frameborder="0" scrolling="no" width="400" height="400"></iframe>
+            </div>
+            <div id="registeriframeContainer">
+                <span id="registerCloseBtn" onclick="closeRegisterIframe()">&times;</span>
+                <iframe src="./pages/register.html" frameborder="0" scrolling="no" width="400" height="400"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <footer></footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="assets/js/home.js"></script>
+    <script type="text/javascript"></script>
+</body>
+
+</html>

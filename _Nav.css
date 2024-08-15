@@ -1,0 +1,36 @@
+html {
+    font-family: sans-serif;
+    margin-left: 10px;
+}
+
+/* Top navbar */
+.topnav {
+    margin-top: -10px; /* Move up */
+    margin-left: -20px; /* Move left */
+    background-color: #8A9A4E; /* Color */
+    border: 1px solid #66271D;
+    overflow: hidden;
+    width: 110%;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: #66271D;
+    color: white;
+}

@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>My Tree</title>
+    <link href="../../assets/css/_UserHome.css" rel="stylesheet" type="text/css">
+    <link href="../../assets/css/_Nav.css" rel="stylesheet" type="text/css">
+    <link href="../../assets/css/_MyTree.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+
+<body>
+    <main>
+        <div class="topnav">
+            <a href="./main.html">Home</a>
+            <a class="active" href="./mytree.html">My Tree</a>
+            <a href="./events.html">Events</a>
+        </div>
+
+        <div style="width:100%; height:700px;" id="tree"></div>
+    </main>
+
+    <footer>
+    </footer>
+
+	<script src="../../assets/js/checkSession.js"></script>
+    <script src="../../assets/js/familytree.js"></script>
+    <script src="../../assets/js/mytree.js"></script>
+
+    <script>
+        let family = new FamilyTree(document.getElementById("tree"), {
+            nodeTreeMenu: true,
+            nodeBinding: {
+                img_0: "ImgUrl",
+                field_0: "name"
+            },
+            editForm: {
+                generateElementsFromFields: false,
+                elements: [
+                    { type: 'textbox', label: 'Full Name', binding: 'name' },
+                    { type: 'textbox', label: 'Photo Url', binding: 'ImgUrl', btn: 'Upload' }
+                ]
+            }
+        });
+        
+     	// Function to update a node and trigger TreeController
+        function updateNodeInController(nodeId, nodeName) {
+            $.ajax({
+                type: 'POST',
+                url: '../../TreeUpdate', // Endpoint URL
+                data: {
+                    nodeId: nodeId,
+                    nodeName: nodeName
+                },
+                success: function (response) {
+                    console.log(response); // Log the response (optional)
+                    alert('Node updated successfully');
+                },
+                error: function (error) {
+                    console.error('Error updating node:', error);
+                    alert('Error updating node');
+                }
+            });
+        }
+
+        /*/ Example usage: Call updateNodeInController when a node is updated
+        family.onUpdateNode(function (args) {
+		    updateNodeInController(args.node.id, args.node.name);
+		});
+        */
+    </script>
+</body>
+
+</html>

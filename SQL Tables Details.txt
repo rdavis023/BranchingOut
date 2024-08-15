@@ -1,0 +1,19 @@
+Data model:
+
+1. User Table:
+Holds information about users, such as their ID, username, password, and email.
+
+2. Family Table:
+Contains details about each family, including a unique family ID and the family name.
+
+3. FamilyMember Table:
+Stores information about individual family members, including their ID, first name, last name, date of birth, relationship, and gender. It also has foreign keys linking back to the User and Family tables.
+
+4. ContactDetails Table:
+Stores contact details for each family member, such as phone numbers, addresses, emails, and social media information. It has a foreign key linking to the FamilyMember table.
+
+5. Event Table:
+Keeps track of family events with details like event ID, name, date, time, location, and description. It has a foreign key linking to the Family table.
+
+6. Photo Table:
+Stores information about photos, including a unique photo ID, the image itself, a description, and the date it was added. It has a foreign key linking to the FamilyMember table.

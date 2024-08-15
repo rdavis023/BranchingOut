@@ -1,0 +1,229 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Events</title>
+    <link href="../../assets/css/_Events.css" rel="stylesheet" type="text/css">
+    <link href="../../assets/css/_Nav.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
+</head>
+
+<body>
+    <main>
+        <div class="topnav">
+            <a href="./main.html">Home</a>
+            <a href="./mytree.html">My Tree</a>
+            <a class="active" href="./events.html">Events</a>
+        </div>
+    </main>
+    <h1 id="header">Events</h1>
+        <div class="contianer" >
+            <div class="myEvents">
+            	<!--
+                <h2>Upcoming Events</h2><br>
+                <div class="event" id="event1">
+                    <h3>Family BBQ</h3>
+                    <p> 04/20/2024</p>
+                    <p>1:00 PM</p>
+                </div><br>
+                <div class="event" id="event2">
+                    <h3>Dog walk with parents</h3>
+                    <p> 04/30/2024</p>
+                    <p>6:00 PM</p>
+                </div><br>
+                <div class="event" id="event3">
+                    <h3>Florida Keys Trip</h3>
+                    <p> 05/10/1994</p>
+                    <p>All day</p>
+                </div><br>
+                -->
+            </div>
+            <div class="calendar">
+              <div class="calendar-header">
+                <span class="month-picker" id="month-picker"> May </span>
+                <div class="year-picker" id="year-picker">
+                  <span class="year-change" id="pre-year">
+                    <pre></pre>
+                  </span>
+                  <span id="year">2020 </span>
+                  <span class="year-change" id="next-year">
+                    <pre>></pre>
+                  </span>
+                </div>
+              </div>
+       
+              <div class="calendar-body">
+                <div class="calendar-week-days">
+                  <div>Sun</div>
+                  <div>Mon</div>
+                  <div>Tue</div>
+                  <div>Wed</div>
+                  <div>Thu</div>
+                  <div>Fri</div>
+                  <div>Sat</div>
+                </div>
+                <div class="calendar-days">
+                </div>
+              </div>
+              <div class="calendar-footer">
+              </div>
+              <div class="date-time-formate">
+                <div class="day-text-formate">TODAY</div>
+                <div class="date-time-value">
+                  <div class="time-formate">02:51:20</div>
+                  <div class="date-formate">20 - march - 2024</div>
+                </div>
+              </div>
+              <div class="month-list"></div>
+            </div>
+            <form id="eventForm" method="post">
+			    <div class="eventForm">
+				    <h2>Create An Event</h2><br>
+				    <label for="evTitle" class="formLabel">Event Title</label><br>
+				    <input id="evTitle" name="evTitle" class="txtInput" type="text" minlength="1" maxlength="25" placeholder="Enter the title of your event" required><br><br>
+				    <label for="evDate" class="formLabel">Event Date</label><br>
+				    <input id="evDate" type="date" name="evDate" class="txtInput" min="2024-1-1" required><br><br>
+				    <label for="evTime" class="formLabel">Event Time</label><br>
+				    <input id="evTime" type="time" name="evTime" class="txtInput" required><br><br>
+				    <!--
+				    <label for="evAddress" class="formLabel">Event Address</label><br>
+				    <input id="evAddress" type="text" name="evAddress" class="txtInput" minlength="1" maxlength="100" required><br><br>
+				    <label for="evTag" class="formLabel">Event Tag</label><br>
+				    <input id="evTag" type="color" name="evTag" class="txtInput"><br><br>
+				    <label for="evAttendees">Number of Attendees</label><br>
+				    <input id="evAttendees" type="number" name="evAttendees" class="txtInput" minlength="1" maxlength="100" required><br><br>
+				    <h4 class="privacyLabel" for="evPrivacy">Event Privacy</h4>
+				    <label for="private">Private</label>
+				    <input id="private" type="radio" name="evPrivacy" class="rdio"><br>
+				    <label for="public">Public</label>
+				    <input id="public" type="radio" name="evPrivacy" class="rdio"><br><br>
+				    -->
+				    <input type="reset" name="eventReset" class="Btn" id="formBttn">
+				    <button type="submit" class="Btn form-group">Submit</button>
+				</div>
+			</form>
+          </div>
+    <footer>
+    </footer>
+
+	<script src="../../assets/js/checkSession.js"></script>
+    <script src="../../assets/js/calendar.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript"></script>
+    <script>
+	    function updateUpcomingEvents(formData) {
+	        console.log("formData:", formData); // Log formData
+	
+	        // Check if formData is an array with at least one element
+	        if (!Array.isArray(formData) || formData.length < 1) {
+	            console.error("Invalid formData format.");
+	            return;
+	        }
+	        
+	     	// Clear existing events
+	        $(".myEvents").empty();
+	     	// Append upcoming events header
+	     	$(".myEvents").append("<h2>Upcoming Events</h2>");
+	
+	        // Loop through each item in formData array
+	        formData.forEach(function(eventData) {
+	            // Format the date to MM/dd/yyyy
+	            var eventDateParts = eventData.date.split('-');
+	            var eventDate = eventDateParts[1] + '/' + eventDateParts[2] + '/' + eventDateParts[0];
+	
+	            // Format the time with AM/PM
+	            var eventTime = formatTime(eventData.time);
+	
+	            // Extract event title, location, description if needed
+	            var eventTitle = eventData.eventName;
+	            // var eventLocation = eventData.location || "Unknown";
+	            // var eventDescription = eventData.description || "No description provided";
+	
+	            // Update the upcoming events section with the new event data
+	            var $upcomingEvents = $(".myEvents");
+	            var $newEvent = $("<div class='event'></div>");
+	            var $eventTitle = $("<h3></h3>").text(eventTitle);
+	            var $eventDate = $("<p></p>").text(eventDate);
+	            var $eventTime = $("<p></p>").text(eventTime);
+	            // var $eventLocation = $("<p></p>").text("Location: " + eventLocation);
+	            // var $eventDescription = $("<p></p>").text("Description: " + eventDescription);
+	
+	            $newEvent.append($eventTitle, $eventDate, $eventTime);
+	            $upcomingEvents.append($newEvent);
+	        });
+	
+	        // Clear the form data after updating events
+	        $("#eventForm")[0].reset();
+	    }
+
+
+	    // Function to format time with AM/PM
+	    function formatTime(time) {
+	        var splitTime = time.split(':');
+	        var hours = parseInt(splitTime[0], 10);
+	        var minutes = parseInt(splitTime[1], 10);
+	        var period = hours >= 12 ? 'PM' : 'AM';
+	        hours = hours % 12;
+	        hours = hours ? hours : 12; // Handle midnight (0 hours)
+	
+	        return hours + ':' + (minutes < 10 ? '0' : '') + minutes + ' ' + period;
+	    }
+    
+	 	// Function to fetch event data and update upcoming events
+        function fetchEventData() {
+            // Send AJAX GET request to fetch event data
+            $.ajax({
+                type: "GET",
+                url: "../../EventUpdate", // URL mapped to your servlet
+                success: function (data) {
+                    // Handle success response and update your web page with the fetched data
+                    console.log("data:" & data); // Log the fetched data for debugging
+                    updateUpcomingEvents(data); // Assuming updateUpcomingEvents function handles the data
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response
+                    console.error("Error:", error);
+                    alert("An error occurred while fetching event data.");
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            // Initial load of events
+            fetchEventData();
+
+            $("#eventForm").submit(function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Serialize form data
+                var formData = $(this).serialize();
+
+                // Send AJAX request to submit event data
+                $.ajax({
+                    type: "POST",
+                    url: "../../EventUpdate",
+                    data: formData,
+                    success: function (response) {
+                        // Handle success response
+                        console.log(response);
+                        if (response.includes('Event submitted successfully!')) {
+                            // Update the upcoming events
+                            fetchEventData(); // Fetch updated event data after submission
+                        } else {
+                            alert("Failed to submit event.");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error response
+                        console.error("Error:", error);
+                        alert("An error occurred while submitting the event.");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
